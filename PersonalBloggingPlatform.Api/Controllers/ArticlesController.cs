@@ -54,11 +54,16 @@ namespace PersonalBloggingPlatform.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Article>> Update(Guid id, UpdateArticleRequest request)
+        public async Task<ActionResult<Article>> Update(Guid id,
+            [FromBody] UpdateArticleRequest request,
+            [FromServices] IValidator<UpdateArticleRequest> validator)
         {
-            if (!ModelState.IsValid)
+
+            var result = await validator.ValidateAsync(request);
+
+            if (!result.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(result.Errors);
             }
 
             var updatedArticle = await _service.UpdateAsync(

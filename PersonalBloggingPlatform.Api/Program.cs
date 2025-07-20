@@ -30,6 +30,7 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 builder.Services.AddScoped<ArticleService>();
 builder.Services.AddScoped<IArticleRepository, EfArticleRepository>();
 builder.Services.AddScoped<IValidator<CreateArticleRequest>, CreateArticleRequestValidator>();
+builder.Services.AddScoped<IValidator<UpdateArticleRequest>, UpdateArticleRequestValidator>();
 
 var app = builder.Build();
 
