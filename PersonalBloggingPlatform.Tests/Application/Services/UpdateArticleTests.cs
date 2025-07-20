@@ -4,7 +4,7 @@ using PersonalBloggingPlatform.Application.Services;
 using PersonalBloggingPlatform.Domain.Entities;
 using PersonalBloggingPlatform.Domain.Interfaces;
 
-namespace PersonalBloggingPlatform.Tests.Application
+namespace PersonalBloggingPlatform.Tests.Application.Services
 {
     [TestFixture]
     public class UpdateArticleTests

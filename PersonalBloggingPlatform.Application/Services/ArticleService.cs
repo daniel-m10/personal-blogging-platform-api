@@ -19,10 +19,12 @@ public class ArticleService(IArticleRepository repository)
     {
         var article = new Article
         {
+            Id = Guid.NewGuid(),
             Title = title,
             Content = content,
             Tags = tags,
-            Author = author
+            Author = author,
+            PublishedAt = DateTime.UtcNow
         };
 
         await _repository.CreateAsync(article);

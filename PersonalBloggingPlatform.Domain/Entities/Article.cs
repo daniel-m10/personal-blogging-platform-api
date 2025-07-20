@@ -1,11 +1,11 @@
 namespace PersonalBloggingPlatform.Domain.Entities;
 
-public class Article
+public record Article
 {
-    public Guid Id { get; init; } = Guid.NewGuid();
-    public string Title { get; set; } = string.Empty;
-    public string Content { get; set; } = string.Empty;
-    public DateTime PublishedAt { get; init; } = DateTime.UtcNow;
-    public List<string> Tags { get; set; } = [];
-    public string Author { get; set; } = string.Empty;
+    public required Guid Id { get; init; }
+    public required string Title { get; set; }
+    public required string Content { get; set; }
+    public required DateTime PublishedAt { get; init; }
+    public List<string>? Tags { get; set; }
+    public required string Author { get; set; }
 }

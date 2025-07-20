@@ -4,7 +4,7 @@ using PersonalBloggingPlatform.Application.Services;
 using PersonalBloggingPlatform.Domain.Entities;
 using PersonalBloggingPlatform.Domain.Interfaces;
 
-namespace PersonalBloggingPlatform.Tests.Application
+namespace PersonalBloggingPlatform.Tests.Application.Services
 {
     [TestFixture]
     public class GetArticlesTests
@@ -15,8 +15,22 @@ namespace PersonalBloggingPlatform.Tests.Application
             // Arrange
             var articles = new List<Article>
             {
-                new() {Title = "Old Article", PublishedAt = DateTime.UtcNow.AddDays(-10)},
-                new() {Title = "New Article", PublishedAt = DateTime.UtcNow}
+                new() {
+                    Id = Guid.NewGuid(),
+                    Title = "Older Article",
+                    Content = "This is an older article.",
+                    PublishedAt = DateTime.UtcNow.AddDays(-10),
+                    Tags = ["Old", "Article"],
+                    Author = "Author1"
+                },
+                new() {
+                    Id = Guid.NewGuid(),
+                    Title = "Newest Article",
+                    Content = "This is the newest article.",
+                    PublishedAt = DateTime.UtcNow,
+                    Tags = ["New", "Article"],
+                    Author = "Author2"
+                }
             };
 
             var mockRepo = new Mock<IArticleRepository>();
