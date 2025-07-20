@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PersonalBloggingPlatform.Api.DTOs;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using PersonalBloggingPlatform.Application.Contracts.Articles;
 using PersonalBloggingPlatform.Application.Services;
 using PersonalBloggingPlatform.Domain.Entities;
 
@@ -32,11 +33,15 @@ namespace PersonalBloggingPlatform.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Article>> Create(CreateArticleRequest request)
+        public async Task<ActionResult<Article>> Create(
+            [FromBody] CreateArticleRequest request,
+            [FromServices] IValidator<CreateArticleRequest> validator)
         {
-            if (!ModelState.IsValid)
+            var result = await validator.ValidateAsync(request);
+
+            if (!result.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(result.Errors);
             }
 
             var article = await _service.CreateAsync(

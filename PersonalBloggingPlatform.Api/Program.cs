@@ -1,6 +1,9 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using PersonalBloggingPlatform.Application.Contracts.Articles;
 using PersonalBloggingPlatform.Application.Services;
+using PersonalBloggingPlatform.Application.Validation;
 using PersonalBloggingPlatform.Domain.Interfaces;
 using PersonalBloggingPlatform.Infrastructure.DataAccess;
 using PersonalBloggingPlatform.Infrastructure.Repositories;
@@ -26,6 +29,7 @@ builder.Services.AddDbContext<BlogDbContext>(options =>
 });
 builder.Services.AddScoped<ArticleService>();
 builder.Services.AddScoped<IArticleRepository, EfArticleRepository>();
+builder.Services.AddScoped<IValidator<CreateArticleRequest>, CreateArticleRequestValidator>();
 
 var app = builder.Build();
 

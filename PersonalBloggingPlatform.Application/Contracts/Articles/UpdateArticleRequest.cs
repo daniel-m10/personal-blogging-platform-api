@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PersonalBloggingPlatform.Api.DTOs
+namespace PersonalBloggingPlatform.Application.Contracts.Articles
 {
     public class UpdateArticleRequest
     {
