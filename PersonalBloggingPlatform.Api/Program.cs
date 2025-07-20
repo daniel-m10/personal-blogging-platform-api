@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PersonalBloggingPlatform.Application.Services;
 using PersonalBloggingPlatform.Domain.Interfaces;
+using PersonalBloggingPlatform.Infrastructure.DataAccess;
 using PersonalBloggingPlatform.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,8 +20,12 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddDbContext<BlogDbContext>(options =>
+{
+    options.UseSqlite("Data Source=App_Data/blog.db");
+});
 builder.Services.AddScoped<ArticleService>();
-builder.Services.AddSingleton<IArticleRepository, InMemoryArticleRepository>();
+builder.Services.AddScoped<IArticleRepository, EfArticleRepository>();
 
 var app = builder.Build();
 
